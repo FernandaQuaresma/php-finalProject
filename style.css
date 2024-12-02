@@ -61,4 +61,45 @@ body {
     color: #ffffff;
     font-family: "Coiny", system-ui;  
 }
+ 
+/* Container geral para os boxes de notícias */
+.container {
+    display: flex;
+    justify-content: space-between; /* Alinha os boxes lado a lado */
+    margin-top: 30px;
+    gap: 20px; /* Espaçamento entre os boxes */
+}
+
+/* Box de notícias */
+.noticia-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 48%; /* Ajuste a largura para ficar lado a lado com o .text-box */
+    padding: 15px;
+    background-color: rgba(126, 45, 126, 0.8); /* Mesma cor de fundo que o .text-box */
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    font-family: "Oswald", sans-serif;
+}
+
+.noticia-box h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.noticia-box img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.noticia-box p {
+    font-size: 14px;
+}
+
+
 

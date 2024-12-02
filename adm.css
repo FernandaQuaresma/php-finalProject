@@ -1,0 +1,173 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("imagens/LoopMusic.jpg");
+    background-size: cover;
+    background-position: center;
+    font-family: "Oswald", sans-serif;
+}
+
+header {
+    background-color: #8b008b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+header .logo {
+    color: white;
+    font-size: 30px;
+    margin-left: 40px;
+    font-family: "Frijole", system-ui;
+}
+
+header ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+header ul li {
+    margin-left: 20px;
+    margin-right: 30px;
+}
+
+header ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 25px;
+    font-family: "Oswald", sans-serif;
+    transition: transform 0.3s ease;
+}
+
+header ul li a:hover {
+    transform: scale(1.2);
+}
+
+.title {
+    font-family: "Frijole", system-ui;
+    font-size: 30px;
+    color: white;
+    margin-left: 36%;
+    margin-top: 5%;
+    text-align: left;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    text-align: center;
+    margin-left: -10px;
+}
+
+form {
+    background-color: #7e2d7e;
+    padding: 30px;
+    width: 400px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    color: #b976b7;
+    font-size: 16px;
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    margin-left: 50px;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.icon-placeholder {
+    width: 40px;
+    height: 40px;
+    background-color: #b976b7;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 22px;
+    margin-right: 10px;
+}
+
+form input,
+form select {
+    width: calc(100% - 60px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #b976b7;
+    border: none;
+    color: white;
+    font-size: 15px;
+    font-family: "Trade Winds", system-ui;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    margin-bottom: 5px;
+}
+
+form button:hover {
+    background-color: #4e0f4c;
+}
+
+form p a {
+    text-decoration: none;
+    color: #b976b7;
+    font-size: 16px;
+}
+
+form p a:hover {
+    text-decoration: underline;
+}
+
+.link a {
+    text-decoration: none;
+    color: #b976b7;
+    font-size: 20px;
+}
+
+.link a:hover{
+    text-decoration: underline;
+}
+
+.text-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    color: #ffff;
+    font-size: 14px;
+    font-family: "Oswald";
+    background-color: #7e2d7e;
+    padding: 15px;
+    width: 15%; 
+    margin-top: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.text-box span {
+    color: #ffffff;
+    font-family: "Coiny", system-ui;
+}
