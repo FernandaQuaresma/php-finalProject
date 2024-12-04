@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 }
 
 // Buscar notícias aprovadas
-$sql = "SELECT titulo, resumo, imagem, nome FROM noticias WHERE status = 'aprovada'";
+$sql = "SELECT titulo, texto, imagem, nome FROM noticias WHERE status = 'aprovada'";
 $result = $conn->query($sql);
 ?>
 
@@ -30,40 +30,46 @@ $result = $conn->query($sql);
 <body>
     <header>
         <h1 class="logo">LoopMusic</h1>
-
         <ul>
             <li><a href="login.php">Login Funcionários</a></li>
             <li><a href="contato.html">Contato</a></li>
         </ul>
     </header>
 
-    <div class="text-box">
-        <h2>
-            <span>Quem somos?</span><br>
-            No LoopMusic, somos apaixonados por música e dedicados a trazer as últimas notícias, tendências e lançamentos de todos os estilos. Nosso objetivo é conectar você ao que há de mais relevante no mundo musical, com conteúdos selecionados por uma equipe que vive e respira música. Seja qual for o seu ritmo, aqui você encontra o que está bombando no cenário musical. Entre no loop e fique por dentro de tudo!
-        </h2>
-    </div>
-<section class=container>
-    <div class="text-box-noticias">
-        <h2>
-            <span>Notícias</span>
-        <?php if ($result->num_rows > 0): ?>
-            <?php while ($noticia = $result->fetch_assoc()): ?>
-                <div class="noticia">
-    <img src="<?php echo htmlspecialchars($noticia['imagem']); ?>" alt="Imagem da notícia" class="img-noticia">
-    <div>
-        <h3><?php echo htmlspecialchars($noticia['titulo']); ?></h3>
-        <p><?php echo htmlspecialchars($noticia['resumo']); ?></p>
-        <p><i class="bi bi-person-fill"></i> <strong>Por </strong> <?php echo htmlspecialchars($noticia['nome']); ?></p>
-    </div>
-</div>
+    <div class="container">
+        <div class="text-box">
+            <h2>
+                <span>Quem somos?</span><br>
+                No LoopMusic, somos apaixonados por música e dedicados a trazer as últimas notícias, tendências e lançamentos de todos os estilos. Nosso objetivo é conectar você ao que há de mais relevante no mundo musical, com conteúdos selecionados por uma equipe que vive e respira música. Seja qual for o seu ritmo, aqui você encontra o que está bombando no cenário musical. Entre no loop e fique por dentro de tudo!
+            </h2>
+        </div>
 
-            <?php endwhile; ?>
-        <?php else: ?>
-            <p>Não há notícias disponíveis no momento.</p>
-        <?php endif; ?>
+        <div class="noticias-slider">
+            <h2><span>Notícias</span></h2>
+            <div class="slider-container">
+                <button class="prev"><i class="bi bi-chevron-left"></i></button>
+                <div class="slider">
+                    <?php if ($result->num_rows > 0): ?>
+                        <?php while ($noticia = $result->fetch_assoc()): ?>
+                            <div class="slide">
+                                <img src="<?php echo htmlspecialchars($noticia['imagem']); ?>" alt="Imagem da notícia" class="img-noticia">
+                                <div class="slide-content">
+                                    <h3><?php echo htmlspecialchars($noticia['titulo']); ?></h3>
+                                    <p><?php echo htmlspecialchars($noticia['texto']); ?></p>
+                                    <p><i class="bi bi-person-fill"></i> <strong>Por </strong> <?php echo htmlspecialchars($noticia['nome']); ?></p>
+                                </div>
+                            </div>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <p>Não há notícias disponíveis no momento.</p>
+                    <?php endif; ?>
+                </div>
+                <button class="next"><i class="bi bi-chevron-right"></i></button>
+            </div>
+        </div>
     </div>
-        </section>
+
+    <script src="script.js"></script>
 </body>
 </html>
 

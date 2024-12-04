@@ -1,21 +1,10 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-image: url("imagens/LoopMusic.jpg");
-    background-size: cover;
-    background-position: center;
-}
-
 header {
     background-color: #8b008b;
     display: flex;
+    margin: -10px;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    width: 100%;
 }
 
 header .logo {
@@ -42,59 +31,114 @@ header ul li a {
     color: white;
     font-size: 25px;
     font-family: "Oswald", sans-serif;
-    transition: transform 0.3s ease;
 }
 
-header ul li a:hover {
-    transform: scale(1.2);
+body {
+    background-image: url("imagens/LoopMusic.jpg");
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
 }
 
-header h1 {
+.container {
+    display: flex;
+    flex-direction: column; /* Coloca as caixas em coluna */
+    align-items: flex-start; /* Alinha as caixas à esquerda */
+    gap: 20px; /* Espaço entre as caixas */
+    margin-top: 30px;
+    padding-left: 20px; /* Adiciona um espaço entre a borda esquerda e as caixas */
+}
+
+.text-box {
+    width: 90%; /* Ajusta a largura da caixa para ocupar boa parte da tela */
+    max-width: 800px; /* Define um limite máximo para a largura */
+    display: flex;
+    flex-direction: row; /* Mantém o conteúdo da caixa em linha */
+    gap: 20px; /* Espaço entre os elementos dentro da caixa */
+}
+
+
+
+.text-box span {
+    color: #ffffff;
     font-family: "Coiny", system-ui;
 }
-.title {
-    font-family: "Frijole", system-ui;
-    font-size: 30px;
-    color: white;
-    margin-left: 36%;
-    margin-top: 5%;
-    text-align: left;
+
+.container {
+    display: flex; 
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 20px; 
+    flex-wrap: wrap; 
 }
 
-.form-container {
+.text-box-noticias span {
+    color: #ffffff;
+    font-family: "Coiny", system-ui;
+}
+.text-box-noticias {
     display: flex;
     justify-content: center;
+    margin-left: 10px;
     align-items: center;
-    height: 10%;
-    text-align: center;
-    margin-left: -10px;
-}
-
-form {
-    background-color: #7e2d7e;
-    padding: 30px;
-    width: 400px;
+    width: 96%; /* Ajustando para usar 100% do espaço dentro da caixa de notícias */
+    padding: 15px;
+    background-color: rgba(126, 45, 126, 0.8);
     border-radius: 15px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    font-family: "Oswald", sans-serif;
 }
 
-form label {
-    color: #b976b7;
-    font-size: 16px;
-    display: block;
-    text-align: left;
-    margin-bottom: 5px;
-    margin-left: 50px;
+
+.noticia-box h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
 }
 
-.input-container {
+.noticia-box img {
+    width: 100%;
+    max-height: 250px; 
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.noticia {
     display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    position: relative;
+    align-items: center; /* Alinha o conteúdo verticalmente */
+    gap: 20px; /* Espaçamento entre a imagem e o texto */
 }
 
-.icon-placeholder {
+.noticia img {
+    width: 40%; /* Ajuste a largura da imagem conforme necessário */
+    height: auto;
+    border-radius: 10px;
+}
+
+.noticia p {
+    display: flex; 
+    align-items: center; 
+    flex: 1; 
+    font-family: "Oswald", sans-serif; /* Define a fonte */
+    color: #fff;
+}
+
+.noticia-box .autor {
+    font-size: 12px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.img-noticia {
+    width: 30%; 
+    height: auto;
+    border-radius: 10px;
+}
+
+.noticia p i {
     width: 40px;
     height: 40px;
     background-color: #b976b7;
@@ -104,74 +148,41 @@ form label {
     align-items: center;
     color: white;
     font-size: 22px;
-    margin-right: 10px;
+    margin-right: 10px; 
 }
 
-form input,
-form select {
-    width: calc(100% - 60px);
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-}
-
-form button {
-    width: 100%;
-    padding: 10px;
-    background-color: #b976b7;
-    border: none;
-    color: white;
-    font-size: 15px;
-    font-family: "Trade Winds", system-ui;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-    margin-bottom: 5px;
-}
-
-form button:hover {
-    background-color: #4e0f4c;
-}
-
-form p a {
-    text-decoration: none;
-    color: #b976b7;
-    font-size: 16px;
-}
-
-form p a:hover {
-    text-decoration: underline;
-}
-
-.link a {
-    text-decoration: none;
-    color: #b976b7;
-    font-size: 20px;
-}
-
-.link a:hover{
-    text-decoration: underline;
-}
-
-.text-box {
+.botoes-acoes {
+    margin-top: 15px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: left;
-    color: #ffff;
+    gap: 10px;
+}
+
+.botao {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
     font-size: 14px;
-    font-family: "Oswald";
-    background-color: #7e2d7e;
-    padding: 15px;
-    width: 15%; 
-    margin-top: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: "Oswald", sans-serif;
+    color: white;
+    transition: 0.3s ease-in-out;
 }
 
-.text-box span {
-    color: #ffffff;
-    font-family: "Coiny", system-ui;
+.botao.aceitar {
+    background-color: #4caf50;
 }
 
+.botao.recusar {
+    background-color: #f44336; 
+}
+.botao:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
 
+.noticia-box h3, .noticia h3 {
+    font-family: "Oswald", sans-serif; /* Define a fonte */
+    color: white; /* Define a cor do texto */
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}

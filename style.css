@@ -1,15 +1,25 @@
+/* Estilo da página */
+body {
+    background-image: url("imagens/LoopMusic.jpg");
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
 header {
     background-color: #8b008b;
     display: flex;
-    margin: -10px;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 40px; /* Ajuste no padding para melhor alinhamento */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 header .logo {
     color: white;
     font-size: 30px;
-    margin-left: 40px;
     font-family: "Frijole", system-ui;
 }
 
@@ -22,7 +32,6 @@ header ul {
 
 header ul li {
     margin-left: 20px;
-    margin-right: 30px;
 }
 
 header ul li a {
@@ -32,116 +41,95 @@ header ul li a {
     font-family: "Oswald", sans-serif;
 }
 
-body {
-    background-image: url("imagens/LoopMusic.jpg");
-    background-size: cover;
-    background-position: center;
-    margin: 0;
-    padding: 0;
+/* Estilo para a seção "Quem somos?" e notícias */
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 20px;
 }
 
 .text-box {
-    display: flex;
-    justify-content: center;
-    margin-left: 10px;
-    align-items: center;
-    text-align: justify;
-    color: #ffff;
-    font-size: 14px;
-    font-family: "Oswald";
+    width: 35%; /* Largura fixa para o texto à esquerda */
     background-color: #7e2d7e;
     padding: 15px;
-    width: 17%; /* Ajustando para 48% da largura para que as caixas fiquem lado a lado */
-    margin-top: 20px;
+    color: white;
+    font-family: "Oswald";
     border-radius: 15px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.text-box span {
-    color: #ffffff;
-    font-family: "Coiny", system-ui;
-}
-
-.container {
-    display: flex; 
-    justify-content: space-between;
-    margin-top: 30px;
-    gap: 20px; 
-    flex-wrap: wrap; 
-}
-
-.text-box-noticias span {
-    color: #ffffff;
-    font-family: "Coiny", system-ui;
-}
-.text-box-noticias {
-    display: flex;
-    justify-content: center;
-    margin-left: 10px;
-    align-items: center;
-    width: 100%; /* Ajustando para usar 100% do espaço dentro da caixa de notícias */
-    padding: 15px;
+.noticias-slider {
+    flex-grow: 1; /* Ocupar todo o espaço restante */
     background-color: rgba(126, 45, 126, 0.8);
     border-radius: 15px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    color: #fff;
+    padding: 20px;
+    color: white;
     font-family: "Oswald", sans-serif;
 }
 
+/* Slider de notícias */
+.slider-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
 
-.noticia-box h3 {
+.slider {
+    display: flex;
+    width: 100%;
+    transition: transform 0.5s ease;
+}
+
+.slide {
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.slide img {
+    width: 30%;
+    height: auto;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.slide-content {
+    flex: 1;
+}
+
+.slide-content h3 {
     font-size: 18px;
     margin-bottom: 10px;
-    font-weight: bold;
 }
 
-.noticia-box img {
-    width: 100%;
-    max-height: 250px; 
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 10px;
+.slide-content p {
+    font-size: 14px;
 }
 
-.noticia {
-    display: flex;
-    align-items: center; /* Alinha o conteúdo verticalmente */
-    gap: 20px; /* Espaçamento entre a imagem e o texto */
+/* Botões do slider */
+button.prev, button.next {
+    background-color: #8b008b;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
 }
 
-.noticia img {
-    width: 40%; /* Ajuste a largura da imagem conforme necessário */
-    height: auto;
-    border-radius: 10px;
+button.prev {
+    left: -50px;
 }
 
-.noticia p {
-    display: flex; 
-    align-items: center; 
-    flex: 1; /* Faz o texto ocupar o restante do espaço disponível */
+button.next {
+    right: -50px;
 }
 
-.noticia-box .autor {
-    font-size: 12px;
-    color: #fff;
-    font-weight: bold;
-}
-
-.img-noticia {
-    width: 30%; 
-    height: auto;
-    border-radius: 10px;
-}
-
-.noticia p i {
-    margin-right: 10px; /* Espaço entre o ícone e o texto */
-    width: 30px; /* Tamanho do ícone */
-    height: 30px; /* Tamanho do ícone */
-    background-color: #b976b7; /* Cor de fundo do círculo */
-    border-radius: 50%; /* Torna o ícone circular */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white; /* Cor do ícone */
-    font-size: 16px; /* Tamanho do ícone */
+button:hover {
+    background-color: #720072;
 }

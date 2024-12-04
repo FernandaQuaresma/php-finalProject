@@ -1,4 +1,4 @@
-<?php
+<?php 
 session_start();
 
 // Verificar se o usuário é administrador
@@ -35,7 +35,7 @@ if (isset($_GET['id']) && isset($_GET['action'])) {
 }
 
 // Buscar matérias pendentes
-$sql = "SELECT id, titulo, nome FROM noticias WHERE status = 'pendente'";
+$sql = "SELECT id, titulo, resumo, imagem, nome FROM noticias WHERE status = 'pendente'";
 $result = $conn->query($sql);
 ?>
 
@@ -44,40 +44,48 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="adm.css"> <!-- Reutilizando o CSS do index -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Coiny&family=Frijole&family=Inter:wght@100..900&family=Knewave&family=Oswald:wght@200..700&family=Trade+Winds&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Oswald:wght@200..700&family=Trade+Winds&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="adm.css">
     <title>Área do Administrador</title>
 </head>
 <body>
 <header>
-        <div class="logo">loopmusic</div>
+        <h1 class="logo">LoopMusic</h1>
         <ul>
             <li><a href="index.php">Home</a></li>
-            <li><a href="logout.php">Logout</a></li>
+            <li><a href="logout.php">logout</a></li>
         </ul>
     </header>
 
-    <h3>Notícias Pendentes</h3>
+<div class="container">
+    <h2 class="text-box-noticias">
+        <span>Notícias Pendentes</span>
+    </h2>
 
-    <table border="1">
-        <tr>
-            <th>Título</th>
-            <th>Nome do Escritor</th>
-            <th>Ações</th>
-        </tr>
-
+    <?php if ($result->num_rows > 0): ?>
         <?php while ($noticia = $result->fetch_assoc()): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($noticia['titulo']); ?></td>
-                <td><?php echo htmlspecialchars($noticia['nome']); ?></td>
-                <td>
-                    <a href="adm.php?id=<?php echo $noticia['id']; ?>&action=aceitar">Aceitar</a> |
-                    <a href="adm.php?id=<?php echo $noticia['id']; ?>&action=recusar">Recusar</a>
-                </td>
-            </tr>
+            <div class="text-box">
+                <div class="noticia">
+                    <img src="<?php echo htmlspecialchars($noticia['imagem']); ?>" alt="Imagem da notícia" class="img-noticia">
+                    <div>
+                        <h3><?php echo htmlspecialchars($noticia['titulo']); ?></h3>
+                        <p><?php echo htmlspecialchars($noticia['resumo']); ?></p>
+                        <p><i class="bi bi-person-fill"></i> <strong>Por </strong><?php echo htmlspecialchars($noticia['nome']); ?></p>
+                        <div class="botoes-acoes">
+                            <a href="adm.php?id=<?php echo $noticia['id']; ?>&action=aceitar" class="botao aceitar">Aceitar</a>
+                            <a href="adm.php?id=<?php echo $noticia['id']; ?>&action=recusar" class="botao recusar">Recusar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <?php endwhile; ?>
-    </table>
+    <?php else: ?>
+        <p class="text-box-noticias">Nenhuma notícia pendente.</p>
+    <?php endif; ?>
+</div>
+
 </body>
 </html>
 
