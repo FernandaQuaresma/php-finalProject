@@ -10,7 +10,7 @@ header .logo {
     color: white;
     font-size: 30px;
     margin-left: 40px;
-    font-family: "Frijole", system-ui; 
+    font-family: "Frijole", system-ui;
 }
 
 header ul {
@@ -30,11 +30,10 @@ header ul li a {
     color: white;
     font-size: 25px;
     font-family: "Oswald", sans-serif;
-
 }
 
 body {
-    background-image: url("imagens/LoopMusic.jpg"); 
+    background-image: url("imagens/LoopMusic.jpg");
     background-size: cover;
     background-position: center;
     margin: 0;
@@ -44,14 +43,15 @@ body {
 .text-box {
     display: flex;
     justify-content: center;
+    margin-left: 10px;
     align-items: center;
-    text-align: left;
+    text-align: justify;
     color: #ffff;
     font-size: 14px;
     font-family: "Oswald";
     background-color: #7e2d7e;
     padding: 15px;
-    width: 15%; 
+    width: 17%; /* Ajustando para 48% da largura para que as caixas fiquem lado a lado */
     margin-top: 20px;
     border-radius: 15px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -59,31 +59,35 @@ body {
 
 .text-box span {
     color: #ffffff;
-    font-family: "Coiny", system-ui;  
-}
- 
-/* Container geral para os boxes de notícias */
-.container {
-    display: flex;
-    justify-content: space-between; /* Alinha os boxes lado a lado */
-    margin-top: 30px;
-    gap: 20px; /* Espaçamento entre os boxes */
+    font-family: "Coiny", system-ui;
 }
 
-/* Box de notícias */
-.noticia-box {
+.container {
+    display: flex; 
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 20px; 
+    flex-wrap: wrap; 
+}
+
+.text-box-noticias span {
+    color: #ffffff;
+    font-family: "Coiny", system-ui;
+}
+.text-box-noticias {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
-    width: 48%; /* Ajuste a largura para ficar lado a lado com o .text-box */
+    margin-left: 10px;
+    align-items: center;
+    width: 100%; /* Ajustando para usar 100% do espaço dentro da caixa de notícias */
     padding: 15px;
-    background-color: rgba(126, 45, 126, 0.8); /* Mesma cor de fundo que o .text-box */
+    background-color: rgba(126, 45, 126, 0.8);
     border-radius: 15px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     color: #fff;
     font-family: "Oswald", sans-serif;
 }
+
 
 .noticia-box h3 {
     font-size: 18px;
@@ -93,13 +97,51 @@ body {
 
 .noticia-box img {
     width: 100%;
+    max-height: 250px; 
+    object-fit: cover;
     border-radius: 10px;
     margin-bottom: 10px;
 }
 
-.noticia-box p {
-    font-size: 14px;
+.noticia {
+    display: flex;
+    align-items: center; /* Alinha o conteúdo verticalmente */
+    gap: 20px; /* Espaçamento entre a imagem e o texto */
 }
 
+.noticia img {
+    width: 40%; /* Ajuste a largura da imagem conforme necessário */
+    height: auto;
+    border-radius: 10px;
+}
 
+.noticia p {
+    display: flex; 
+    align-items: center; 
+    flex: 1; /* Faz o texto ocupar o restante do espaço disponível */
+}
 
+.noticia-box .autor {
+    font-size: 12px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.img-noticia {
+    width: 30%; 
+    height: auto;
+    border-radius: 10px;
+}
+
+.noticia p i {
+    margin-right: 10px; /* Espaço entre o ícone e o texto */
+    width: 30px; /* Tamanho do ícone */
+    height: 30px; /* Tamanho do ícone */
+    background-color: #b976b7; /* Cor de fundo do círculo */
+    border-radius: 50%; /* Torna o ícone circular */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; /* Cor do ícone */
+    font-size: 16px; /* Tamanho do ícone */
+}

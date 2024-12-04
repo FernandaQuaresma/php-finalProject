@@ -8,7 +8,6 @@ body {
     background-image: url("imagens/LoopMusic.jpg");
     background-size: cover;
     background-position: center;
-    font-family: "Oswald", sans-serif;
 }
 
 header {
@@ -50,6 +49,9 @@ header ul li a:hover {
     transform: scale(1.2);
 }
 
+header h1 {
+    font-family: "Coiny", system-ui;
+}
 .title {
     font-family: "Frijole", system-ui;
     font-size: 30px;
@@ -171,3 +173,5 @@ form p a:hover {
     color: #ffffff;
     font-family: "Coiny", system-ui;
 }
+
+

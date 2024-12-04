@@ -1,28 +1,23 @@
 <?php
 session_start();
 
-// Verificar se o usuário é um administrador
+// Verificar se o usuário é administrador
 if (!isset($_SESSION['user_id']) || $_SESSION['tipo_usuario'] !== 'administrador') {
     header('Location: login.php');
     exit;
 }
 
-// Conectar ao banco de dados
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "portal_noticias";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Conectar ao banco
+$conn = new mysqli("localhost", "root", "", "portal_noticias");
 
 if ($conn->connect_error) {
     die("Conexão falhou: " . $conn->connect_error);
 }
 
-// Processar a aprovação ou recusa de uma notícia
+// Alterar status da notícia
 if (isset($_GET['id']) && isset($_GET['action'])) {
-    $id = $_GET['id'];
-    $action = $_GET['action']; // "aceitar" ou "recusar"
+    $id = intval($_GET['id']);
+    $action = $_GET['action'];
 
     if ($action === 'aceitar') {
         $status = 'aprovada';
@@ -30,52 +25,32 @@ if (isset($_GET['id']) && isset($_GET['action'])) {
         $status = 'recusada';
     }
 
-    // Atualizar o status da notícia
-    $sql = "UPDATE noticias SET status = ? WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('si', $status, $id);
-    $stmt->execute();
-    $stmt->close();
-
-    // Redirecionar após a atualização
-    header("Location: adm.php");
-    exit;
-}
-
-// Buscar todas as matérias pendentes
-$sql = "SELECT * FROM noticias WHERE status = 'pendente'";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    while($row = $result->fetch_assoc()) {
-        echo "<div>";
-        echo "<h3>" . $row['titulo'] . "</h3>";
-        echo "<p>" . $row['resumo'] . "</p>";
-        echo "<img src='" . $row['imagem'] . "' alt='Imagem da matéria'>";
-        echo "<form method='POST' action='alterar_status.php'>";
-        echo "<input type='hidden' name='id' value='" . $row['id'] . "'>";
-        echo "<button type='submit' name='status' value='aprovado'>Aprovar</button>";
-        echo "<button type='submit' name='status' value='rejeitado'>Rejeitar</button>";
-        echo "</form>";
-        echo "</div>";
+    if (isset($status)) {
+        $sql = "UPDATE noticias SET status = ? WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("si", $status, $id);
+        $stmt->execute();
+        $stmt->close();
     }
-} else {
-    echo "Não há matérias pendentes.";
 }
 
-$conn->close();
+// Buscar matérias pendentes
+$sql = "SELECT id, titulo, nome FROM noticias WHERE status = 'pendente'";
+$result = $conn->query($sql);
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Coiny&family=Frijole&family=Inter:wght@100..900&family=Knewave&family=Oswald:wght@200..700&family=Trade+Winds&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Oswald:wght@200..700&family=Trade+Winds&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="adm.css">
     <title>Área do Administrador</title>
 </head>
 <body>
-    <header>
+<header>
         <div class="logo">loopmusic</div>
         <ul>
             <li><a href="index.php">Home</a></li>
@@ -83,10 +58,8 @@ $conn->close();
         </ul>
     </header>
 
-    <h2 class="title">Área do Administrador</h2>
-
     <h3>Notícias Pendentes</h3>
-    
+
     <table border="1">
         <tr>
             <th>Título</th>
@@ -99,17 +72,15 @@ $conn->close();
                 <td><?php echo htmlspecialchars($noticia['titulo']); ?></td>
                 <td><?php echo htmlspecialchars($noticia['nome']); ?></td>
                 <td>
-                <a href="alterar_status.php?id=<?php echo $noticia['id']; ?>&action=aceitar">Aceitar</a> |
-<a href="alterar_status.php?id=<?php echo $noticia['id']; ?>&action=recusar">Recusar</a>
+                    <a href="adm.php?id=<?php echo $noticia['id']; ?>&action=aceitar">Aceitar</a> |
+                    <a href="adm.php?id=<?php echo $noticia['id']; ?>&action=recusar">Recusar</a>
                 </td>
             </tr>
         <?php endwhile; ?>
     </table>
-
-    <p><a href="logout.php">Sair</a></p>
 </body>
 </html>
 
 <?php
 $conn->close();
-?>  
+?>

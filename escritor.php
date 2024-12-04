@@ -1,62 +1,46 @@
 <?php
-session_start(); // Iniciar a sessão
+session_start();
 
-// Verificar se o usuário está autenticado e se é um escritor
+// Verificar autenticação e permissão
 if (!isset($_SESSION['user_id']) || $_SESSION['tipo_usuario'] !== 'escritor') {
-    header('Location: login.php'); // Se não estiver autenticado ou não for escritor
+    header('Location: login.php');
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Conectar ao banco de dados
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "portal_noticias";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Conexão ao banco
+    $conn = new mysqli("localhost", "root", "", "portal_noticias");
 
     if ($conn->connect_error) {
         die("Conexão falhou: " . $conn->connect_error);
     }
 
-    // Receber dados do formulário
+    // Dados do formulário
     $titulo = $_POST['titulo'];
     $texto = $_POST['texto'];
     $resumo = $_POST['resumo'];
     $nome = $_POST['nome'];
-    $status = 'pendente'; // Status inicial da matéria
+    $status = 'pendente';
+    $imagem = null;
 
-    // Processar o upload da imagem
-    $imagem = ''; // Variável para armazenar o caminho da imagem
-
+    // Upload da imagem (opcional)
     if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] == 0) {
-        // Definir o diretório onde a imagem será salva
         $diretorio = 'uploads/imagens/';
         $imagemNome = basename($_FILES['imagem']['name']);
         $caminhoImagem = $diretorio . $imagemNome;
 
-        // Validar o tipo de arquivo (apenas imagens)
         $tipoImagem = strtolower(pathinfo($caminhoImagem, PATHINFO_EXTENSION));
         $tiposPermitidos = ['jpg', 'jpeg', 'png', 'gif'];
 
         if (in_array($tipoImagem, $tiposPermitidos)) {
-            // Mover o arquivo para o diretório
             if (move_uploaded_file($_FILES['imagem']['tmp_name'], $caminhoImagem)) {
-                $imagem = $caminhoImagem; // A imagem foi salva no diretório
-            } else {
-                echo "Erro ao fazer o upload da imagem.";
-                exit;
+                $imagem = $caminhoImagem;
             }
-        } else {
-            echo "Tipo de arquivo inválido. Aceitamos apenas imagens.";
-            exit;
         }
     }
 
-    // Inserir dados no banco de dados (removendo o escritor_id)
-    $sql = "INSERT INTO noticias (titulo, imagem, texto, resumo, nome, status) 
-            VALUES (?, ?, ?, ?, ?, ?)";
+    // Inserir no banco
+    $sql = "INSERT INTO noticias (titulo, imagem, texto, resumo, nome, status) VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssssss", $titulo, $imagem, $texto, $resumo, $nome, $status);
     $stmt->execute();
@@ -64,11 +48,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
     $conn->close();
 
-    // Redirecionar após sucesso
+    // Redirecionar após o envio
     header('Location: escritor.php');
     exit;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="pt-br">
